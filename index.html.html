@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cuộc phiêu lưu khám phá núi rừng - Toán lớp 3</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Trebuchet MS",sans-serif;background:linear-gradient(#b9ecff,#eaffd8);color:#173b2b;min-height:100vh}
+.game{max-width:1050px;margin:auto;padding:14px}.top,.card{background:#fffffff2;border-radius:24px;box-shadow:0 7px 22px #0002}.top{padding:14px 18px}.title{text-align:center;font-size:clamp(24px,4vw,40px);font-weight:900;color:#28613b}.sub{text-align:center;margin:6px}.stats{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.badge,.sound{padding:8px 14px;border-radius:20px;font-weight:800;background:#fff5b8;border:2px solid #e0c54e}.sound{background:#e0f4ff;border-color:#72b9df}
+.scene{height:270px;margin:12px 0;border:4px solid white;border-radius:25px;overflow:hidden;position:relative;background:linear-gradient(#88d9ff 0 56%,#9bd16a 56%)}.sun{position:absolute;right:7%;top:18px;font-size:52px}.cloud{position:absolute;font-size:42px;animation:cloud 18s linear infinite}.c1{left:8%;top:25px}.c2{left:48%;top:52px}.mount{position:absolute;bottom:62px;font-size:145px;line-height:.6}.m1{left:4%}.m2{left:34%;font-size:180px}.m3{right:2%}.birds{position:absolute;font-size:30px;top:75px;left:15%;animation:fly 7s linear infinite}.b2{left:65%;top:105px;animation-delay:2s}.forest{position:absolute;bottom:30px;width:100%;font-size:48px;letter-spacing:6px;white-space:nowrap}.path{position:absolute;bottom:38px;width:100%;text-align:center;font-size:30px;letter-spacing:8px}.hero{position:absolute;bottom:46px;left:9%;font-size:62px;transition:left .7s}.stream{position:absolute;bottom:0;width:100%;height:38px;background:#55c8ed;border-top:4px solid #d9fbff}
+.card{padding:22px}.start,.finish{text-align:center;padding:18px}.big{font-size:65px}.primary{background:#4eae61;color:white;border:0;border-radius:30px;padding:14px 24px;font-size:19px;font-weight:900;box-shadow:0 4px #347c43;cursor:pointer}.progress{display:flex;justify-content:center;gap:5px;margin-bottom:12px}.dot{width:27px;height:10px;border-radius:9px;background:#d8e6d2}.dot.done{background:#5ab365}.dot.cur{background:#efc64b}.stage{text-align:center;font-weight:800;color:#5c794e}.question{text-align:center;font-size:clamp(22px,3vw,31px);font-weight:900;line-height:1.35;margin:12px auto 18px;max-width:850px}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px;margin:auto}.option{padding:15px;border:3px solid #9bc88a;border-radius:17px;background:#f3fbef;font-size:20px;font-weight:800;cursor:pointer}.option:hover{background:#e5f7dd}.option:disabled{cursor:default}.correct{background:#c9f4cf!important;border-color:#48ad5c!important}.wrong{background:#ffe0c9!important;border-color:#df8955!important}.feedback{text-align:center;min-height:30px;margin:13px 0;font-weight:900;font-size:18px}.controls{text-align:center;margin-top:12px}.ctrl{padding:10px 17px;border-radius:22px;border:2px solid #aebdc4;font-weight:800;cursor:pointer}.hint{background:#fff4c2;border-color:#dec050}.hintbox{max-width:700px;margin:10px auto;padding:12px;border:2px dashed #d9b846;border-radius:15px;background:#fff9dd}.hidden{display:none!important}table{width:100%;max-width:620px;margin:15px auto;border-collapse:collapse}td{padding:9px;border-bottom:1px solid #dbe5d7}td:last-child{text-align:right;font-weight:900}
+@keyframes fly{0%{transform:translateX(0)}50%{transform:translateX(130px) translateY(-18px)}100%{transform:translateX(250px)}}@keyframes cloud{to{transform:translateX(130px)}}
+@media(max-width:650px){.scene{height:225px}.mount{font-size:105px}.m2{font-size:135px}.hero{font-size:50px}.forest{font-size:34px}.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="game">
+<header class="top">
+<div class="title">🏔️ CUỘC PHIÊU LƯU KHÁM PHÁ NÚI RỪNG 🦜</div>
+<div class="sub">Ôn tập Toán lớp 3 • Số trong phạm vi 1000 • Cộng và trừ trong phạm vi 1000</div>
+<div class="stats"><div class="badge">⭐ Điểm: <span id="score">0</span>/10</div><div class="badge">🧭 Câu: <span id="num">1</span>/10</div><button class="sound" id="sound">🔊 Âm thanh: Bật</button></div>
+</header>
+<section class="scene">
+<div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>
+<div class="mount m1">⛰️</div><div class="mount m2">🏔️</div><div class="mount m3">⛰️</div>
+<div class="birds">🐦</div><div class="birds b2">🦜</div><div class="forest">🌲🌳🌲🌳🌲🌳🌲🌳🌲</div><div class="path">🌿🌿🌿🌿🌿🌿🌿🌿</div><div class="hero" id="hero">🧑‍🚀</div><div class="stream"></div>
+</section>
+<main class="card">
+<section id="start" class="start"><div class="big">🌳🐦🏔️</div><h2>Sẵn sàng lên đường chưa?</h2><p>Vượt qua 10 thử thách để tìm kho báu trên đỉnh núi!</p><button class="primary" id="startBtn">🚀 BẮT ĐẦU KHÁM PHÁ</button></section>
+<section id="game" class="hidden"><div class="progress" id="progress"></div><div class="stage" id="stage"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div id="hintbox" class="hintbox hidden"></div><div class="controls"><button class="ctrl hint" id="hint">💡 Gợi ý</button> <button class="ctrl hidden" id="next">➡️ Thử thách tiếp theo</button></div></section>
+<section id="finish" class="finish hidden"><div class="big">🎉🏆🎁</div><h2>EM ĐÃ CHINH PHỤC NÚI RỪNG!</h2><p id="message"></p><table><tr><td>🎯 Số câu đúng</td><td id="right"></td></tr><tr><td>📊 Tỉ lệ đúng</td><td id="percent"></td></tr><tr><td>⭐ Điểm số</td><td id="final"></td></tr><tr><td>🏅 Xếp loại</td><td id="rank"></td></tr></table><button class="primary" id="restart">🔄 CHƠI LẠI</button></section>
+</main>
+</div>
+<script>
+const qs=[
+["Số gồm 4 trăm, 3 chục và 7 đơn vị là số nào?",["437","473","347","407"],0,"Xác định hàng trăm, hàng chục và hàng đơn vị."],
+["Số 608 được đọc là:",["Sáu trăm tám mươi","Sáu trăm linh tám","Sáu trăm tám","Sáu trăm không tám"],1,"Chú ý chữ số 0 ở hàng chục."],
+["Điền dấu thích hợp: 725 ☐ 752",[" > "," < "," = "," + "],1,"So sánh hàng trăm trước, rồi đến hàng chục."],
+["Dãy số nào được sắp xếp từ bé đến lớn?",["245 – 254 – 425 – 524","524 – 425 – 254 – 245","245 – 425 – 254 – 524","254 – 245 – 425 – 524"],0,"So sánh các số theo hàng trăm và hàng chục."],
+["Tính: 236 + 145 = ?",["371","381","391","361"],1,"Cộng lần lượt hàng đơn vị, chục, trăm."],
+["Tính: 427 + 256 = ?",["673","683","693","663"],1,"Cộng theo từng hàng, nhớ nếu cần."],
+["Tính: 754 – 321 = ?",["423","433","443","453"],1,"Trừ theo từng hàng từ phải sang trái."],
+["Tính: 900 – 275 = ?",["615","625","635","645"],1,"Chú ý cách trừ khi có chữ số 0."],
+["Trong rừng có 325 con chim. Có thêm 148 con chim bay đến. Có tất cả bao nhiêu con chim?",["463 con","473 con","483 con","493 con"],1,"Thực hiện phép cộng 325 + 148."],
+["Nhà thám hiểm có 850 điểm và dùng 275 điểm. Còn lại bao nhiêu điểm?",["565","575","585","595"],1,"Thực hiện phép trừ 850 – 275."]
+];
+const stages=["🌳 Khu rừng xanh","💧 Con suối","🐿️ Thung lũng","🦜 Rừng chim","🏔️ Chân núi","⛰️ Đường núi","🌲 Rừng cổ thụ","💦 Thác nước","☁️ Đỉnh núi","🎁 Kho báu"];
+let i=0,score=0,locked=false,soundOn=true,ctx;
+const $=x=>document.getElementById(x);
+function audio(f,d=.12){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;g.gain.value=.07;o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+d)}catch(e){}}
+function render(){locked=false;let q=qs[i];$("num").textContent=i+1;$("score").textContent=score;$("stage").textContent=stages[i]+" • THỬ THÁCH "+(i+1);$("question").textContent=q[0];$("feedback").textContent="";$("hintbox").classList.add("hidden");$("hintbox").textContent="";$("hint").classList.remove("hidden");$("next").classList.add("hidden");$("next").textContent=i===9?"🏆 XEM KẾT QUẢ":"➡️ Thử thách tiếp theo";$("options").innerHTML=q[1].map((x,n)=>'<button class="option">'+String.fromCharCode(65+n)+". "+x+"</button>").join("");document.querySelectorAll(".option").forEach((b,n)=>b.onclick=()=>answer(n));$("progress").innerHTML=qs.map((_,n)=>'<span class="dot '+(n<i?"done ":"")+(n===i?"cur":"")+'"></span>').join("");$("hero").style.left=(9+i*8.2)+"%"}
+function answer(n){if(locked)return;locked=true;let q=qs[i],bs=document.querySelectorAll(".option");bs.forEach(b=>b.disabled=true);if(n===q[2]){score++;bs[n].classList.add("correct");$("feedback").textContent="🎉 CHÍNH XÁC! Em đã vượt qua thử thách!";audio(660);setTimeout(()=>audio(880,.16),120)}else{bs[n].classList.add("wrong");bs[q[2]].classList.add("correct");$("feedback").textContent="🌱 Chưa chính xác rồi! Hãy ghi nhớ đáp án đúng nhé.";audio(180,.18)}$("score").textContent=score;$("hint").classList.add("hidden");$("next").classList.remove("hidden")}
+$("hint").onclick=()=>{$("hintbox").textContent="💡 Gợi ý: "+qs[i][3];$("hintbox").classList.remove("hidden")};
+$("next").onclick=()=>{if(i<9){i++;render()}else finish()};
+function finish(){$("game").classList.add("hidden");$("finish").classList.remove("hidden");$("right").textContent=score+"/10";$("percent").textContent=score*10+"%";$("final").textContent=score+"/10";let r,m;if(score>=9){r="🏆 Nhà thám hiểm Toán học xuất sắc!";m="Em đã chinh phục đỉnh núi và tìm thấy kho báu!"}else if(score>=7){r="🥇 Nhà thám hiểm Toán học giỏi!";m="Em đã hoàn thành hành trình thật tuyệt vời!"}else if(score>=5){r="🥈 Em đã vượt qua nhiều thử thách!";m="Hãy luyện tập thêm để lần sau chinh phục trọn vẹn núi rừng nhé!"}else{r="🌱 Hãy luyện tập thêm!";m="Mỗi lần luyện tập là một bước tiến. Em hãy thử lại nhé!"}$("rank").textContent=r;$("message").textContent=m;audio(523,.18);setTimeout(()=>audio(659,.18),120);setTimeout(()=>audio(784,.18),240);setTimeout(()=>audio(1047,.25),360)}
+function start(){i=0;score=0;$("start").classList.add("hidden");$("finish").classList.add("hidden");$("game").classList.remove("hidden");render();audio(1200,.08);setTimeout(()=>audio(1500,.08),100)}
+$("startBtn").onclick=start;$("restart").onclick=start;$("sound").onclick=()=>{soundOn=!soundOn;$("sound").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";if(soundOn)audio(1200,.08)}
+</script>
+</body></html>
